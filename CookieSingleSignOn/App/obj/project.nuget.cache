@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "dgSpecHash": "VoArP4SqLvI1YO6tp+6pU3g/ewB9hK4PFeHGNT2UCvoUE0q9nfwGyUHTAnVhyjabdpomIQYZEWR4drshL7tXwg==",
+  "success": true,
+  "projectFilePath": "C:\\SUHUT\\DOTNET\\ASP.NET Core Authentication\\CookieSingleSignOn\\App\\App.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\suhut\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\7.0.11\\microsoft.aspnetcore.cryptography.internal.7.0.11.nupkg.sha512",
+    "C:\\Users\\suhut\\.nuget\\packages\\microsoft.aspnetcore.dataprotection\\7.0.11\\microsoft.aspnetcore.dataprotection.7.0.11.nupkg.sha512",
+    "C:\\Users\\suhut\\.nuget\\packages\\microsoft.aspnetcore.dataprotection.abstractions\\7.0.11\\microsoft.aspnetcore.dataprotection.abstractions.7.0.11.nupkg.sha512",
+    "C:\\Users\\suhut\\.nuget\\packages\\microsoft.aspnetcore.dataprotection.stackexchangeredis\\7.0.11\\microsoft.aspnetcore.dataprotection.stackexchangeredis.7.0.11.nupkg.sha512",
+    "C:\\Users\\suhut\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\suhut\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\suhut\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\7.0.0\\microsoft.extensions.fileproviders.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\suhut\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\7.0.0\\microsoft.extensions.hosting.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\suhut\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.1\\microsoft.extensions.logging.abstractions.7.0.1.nupkg.sha512",
+    "C:\\Users\\suhut\\.nuget\\packages\\microsoft.extensions.options\\7.0.1\\microsoft.extensions.options.7.0.1.nupkg.sha512",
+    "C:\\Users\\suhut\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "C:\\Users\\suhut\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.8\\pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
+    "C:\\Users\\suhut\\.nuget\\packages\\stackexchange.redis\\2.6.122\\stackexchange.redis.2.6.122.nupkg.sha512",
+    "C:\\Users\\suhut\\.nuget\\packages\\system.formats.asn1\\7.0.0\\system.formats.asn1.7.0.0.nupkg.sha512",
+    "C:\\Users\\suhut\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512",
+    "C:\\Users\\suhut\\.nuget\\packages\\system.security.cryptography.pkcs\\7.0.0\\system.security.cryptography.pkcs.7.0.0.nupkg.sha512",
+    "C:\\Users\\suhut\\.nuget\\packages\\system.security.cryptography.xml\\7.0.1\\system.security.cryptography.xml.7.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

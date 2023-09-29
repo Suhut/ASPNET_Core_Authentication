@@ -1,0 +1,9 @@
+﻿C:\Windows\System32\drivers\etc\hosts
+
+127.0.0.1 identity.company.local
+127.0.0.1 api.company.local
+
+
+install caddy
+https://caddyserver.com/docs/install#chocolatey-windows
+caddy start

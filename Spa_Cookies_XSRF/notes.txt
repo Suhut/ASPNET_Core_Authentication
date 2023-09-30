@@ -1,0 +1,5 @@
+C:\Windows\System32\drivers\etc\hosts
+
+127.0.0.1 api.company.local
+127.0.0.1 app.company.local
+127.0.0.1 evil.local

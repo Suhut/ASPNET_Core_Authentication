@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="https://api.company.local/data" method="post">
+        <button>Data (form)</button>
+    </form>
+    <form action="https://api.company.local/ctr/login" method="post">
+        <input type="hidden" value="evil" name="Username">
+        <input type="hidden" value="pw" name="Password">
+        <button>Login to Ctrl (form)</button>
+    </form>
+
+    <button onclick=login()>Login (Json)</button>
+    <button onclick=data()>Data (Json)</button>
+    <button onclick=protected()>Protected (Json)</button>
+    <script>
+        const login = () => fetch('https://api.company.local/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials:"include",
+            body: JSON.stringify( {
+                Username:'evil',
+                Password:'pw'
+            })
+        });
+
+        const data = () => fetch('https://api.company.local/data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials:"include", 
+        });
+
+        const protected = () => fetch('https://api.company.local/protected', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials:"include", 
+        });
+    </script>
+</body>
+</html>

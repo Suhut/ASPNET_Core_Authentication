@@ -1,0 +1,12 @@
+
+api.company.local {
+	reverse_proxy localhost:5054
+}
+
+app.company.local {
+	reverse_proxy localhost:5174
+}
+
+evil.local {
+	reverse_proxy localhost:5187
+}

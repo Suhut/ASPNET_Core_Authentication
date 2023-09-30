@@ -24,20 +24,22 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 var app = builder.Build();
 
 app.UseCors(x =>
-    x.WithOrigins("https://app.company.local")
-    .AllowAnyMethod()
-    .AllowAnyHeader()
-    .AllowCredentials()
+
+    //x.WithOrigins("https://app.company.local")
+    //.AllowAnyMethod()
+    //.AllowAnyHeader()
+    //.AllowCredentials()
 
     //x.AllowAnyOrigin()
     //.AllowAnyMethod()
     //.AllowAnyHeader()
     //.AllowCredentials()
 
-    //x.WithOrigins("https://app.company.local", "https://evil.local")
-    //.AllowAnyMethod()
-    //.AllowAnyHeader()
-    //.AllowCredentials()
+    x.WithOrigins("https://app.company.local", "https://evil.local")
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowCredentials()
+
     );
 
 app.UseAuthentication();

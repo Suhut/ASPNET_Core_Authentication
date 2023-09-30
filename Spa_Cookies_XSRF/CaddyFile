@@ -1,6 +1,6 @@
 
 api.company.local {
-	reverse_proxy localhost:5054
+	reverse_proxy https://localhost:7134
 }
 
 app.company.local {
@@ -8,5 +8,5 @@ app.company.local {
 }
 
 evil.local {
-	reverse_proxy localhost:5187
+	reverse_proxy https://localhost:7087
 }

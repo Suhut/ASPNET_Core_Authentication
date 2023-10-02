@@ -1,100 +1,143 @@
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.DataProtection;
-using System.Runtime.Intrinsics.Arm;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
 using System.Security.Claims;
+using System.Text.Encodings.Web;
+
+const string AuthSchema = "cookie";
+const string AuthSchema2 = "cookie2";
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.Services.AddDataProtection();
-//builder.Services.AddHttpContextAccessor();
-//builder.Services.AddScoped<AuthService>();
-
-builder.Services.AddAuthentication("cookie")
-    .AddCookie("cookie")
+builder.Services.AddAuthentication(AuthSchema)
+    .AddCookie(AuthSchema)
+    .AddCookie(AuthSchema2)
     ;
+
+builder.Services.AddAuthorization(builder =>
+{
+    builder.AddPolicy("eu policy", pd =>
+    {
+        pd.RequireAuthenticatedUser()
+            .AddAuthenticationSchemes(AuthSchema)
+            .AddRequirements(new MyRequirement())
+            .RequireClaim("passport_type", "eur");
+    });
+});
 
 var app = builder.Build();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 //app.Use((ctx, next) =>
 //{
-//    var idp = ctx.RequestServices.GetRequiredService<IDataProtectionProvider>();
+//    if(ctx.Request.Path.StartsWithSegments("/login"))
+//    {
+//        return next();
+//    }
 
-//    var protector = idp.CreateProtector("auth-cookie");
+//    if(!ctx.User.Identities.Any(x=>x.AuthenticationType==AuthSchema))
+//    {
+//        ctx.Response.StatusCode = 401;
+//        return Task.CompletedTask;
+//    }
 
-//    var authCookie = ctx.Request.Headers.Cookie.FirstOrDefault(x => x.StartsWith("auth="));
-//    if(authCookie != null)
-//    { 
-//        var protectedPayload = authCookie.Split("=").Last();
-//        var payload = protector.Unprotect(protectedPayload);
-//        var parts = payload.Split(":");
-//        var key = parts[0];
-//        var value = parts[1];
-
-//        var claims = new List<Claim>();
-//        claims.Add(new Claim(key, value));
-//        var identity = new ClaimsIdentity(claims);
-//        ctx.User = new ClaimsPrincipal(identity);
-
-
+//    if (!ctx.User.HasClaim("passport_type", "eur"))
+//    {
+//        ctx.Response.StatusCode = 403;
+//        return Task.CompletedTask;
 //    }
 
 //    return next();
 //});
 
-app.UseAuthentication();
-
-app.MapGet("/username", (HttpContext ctx) =>
+app.MapGet("/unsecure", (HttpContext ctx) =>
 {
-    return ctx.User.FindFirst("usr").Value;
 
-    //var protector = idp.CreateProtector("auth-cookie");
+    return ctx.User.FindFirst("usr")?.Value ?? "empty";
 
-    //var authCookie = ctx.Request.Headers.Cookie.FirstOrDefault(x => x.StartsWith("auth="));
-    //var protectedPayload = authCookie.Split("=").Last();
-    //var payload = protector.Unprotect(protectedPayload);
-    //var parts = payload.Split(":");
-    //var key = parts[0];
-    //var value = parts[1];
-    //return value;
-    //return authCookie;
-    //return "suhut";
 });
 
+app.MapGet("/sweden", (HttpContext ctx) =>
+{
+    //if (!ctx.User.Identities.Any(x => x.AuthenticationType == AuthSchema))
+    //{
+    //    ctx.Response.StatusCode = 401;
+    //    return "";
+    //}
+
+    //if (!ctx.User.HasClaim("passport_type", "eur"))
+    //{
+    //    ctx.Response.StatusCode = 403;
+    //    return "";
+    //} 
+
+    return "allowed";
+
+}).RequireAuthorization("eu policy");
+
+app.MapGet("/norway", (HttpContext ctx) =>
+{
+    //if (!ctx.User.Identities.Any(x => x.AuthenticationType == AuthSchema))
+    //{
+    //    ctx.Response.StatusCode = 401;
+    //    return "";
+    //}
+
+    //if (!ctx.User.HasClaim("passport_type", "nor"))
+    //{
+    //    ctx.Response.StatusCode = 403;
+    //    return "";
+    //}
+
+    return "allowed";
+
+}).RequireAuthorization("au policy");
+ 
+app.MapGet("/denmark", (HttpContext ctx) =>
+{
+    //if (!ctx.User.Identities.Any(x => x.AuthenticationType == AuthSchema2))
+    //{
+    //    ctx.Response.StatusCode = 401;
+    //    return "";
+    //}
+
+    //if (!ctx.User.HasClaim("passport_type", "den"))
+    //{
+    //    ctx.Response.StatusCode = 403;
+    //    return "";
+    //}
+
+    return "allowed";
+
+}).RequireAuthorization("au policy");
 
 app.MapGet("/login", async (HttpContext ctx) =>
 {
-    var claims= new List<Claim>();
+    var claims = new List<Claim>();
     claims.Add(new Claim("usr", "suhut"));
-    var identity = new ClaimsIdentity(claims, "cookie");
+    claims.Add(new Claim("passport_type", "eur"));
+    var identity = new ClaimsIdentity(claims, AuthSchema);
     var user = new ClaimsPrincipal(identity);
 
-    await ctx.SignInAsync("cookie", user);
-
-    //auth.SignIn();
-
-    //var protector = idp.CreateProtector("auth-cookie");
-    //ctx.Response.Headers["set-cookie"] = $"auth={protector.Protect("usr:suhut")}";
-
-    //ctx.Response.Headers["set-cookie"] = "auth=usr:suhut";
+    await ctx.SignInAsync(AuthSchema, user);
     return "ok";
-}); 
+}).AllowAnonymous();
 
 app.Run();
 
-//public class AuthService
-//{
-//    private readonly IDataProtectionProvider _idp;
-//    private readonly IHttpContextAccessor _accessor;
 
-//    public AuthService(IDataProtectionProvider idp, IHttpContextAccessor accessor)
-//    {
-//        _idp = idp;
-//        _accessor = accessor;
-//    }
+//https://stackoverflow.com/questions/49389970/asp-net-core-authorization-combining-or-requirements
+//https://coderethinked.com/policy-based-authorization-in-asp-net-core/
+public class MyRequirement : IAuthorizationRequirement { }
 
-//    public void SignIn ()
-//    {
-//        var protector = _idp.CreateProtector("auth-cookie");
-//        _accessor.HttpContext.Response.Headers["set-cookie"] = $"auth={protector.Protect("usr:suhut")}";
-//    }
-//}
+public class MyRequirementHandler : AuthorizationHandler<MyRequirement>
+{
+    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, MyRequirement requirement)
+    {
+        //context.User
+        //context.Succeed(new MyRequirement());
+        return Task.CompletedTask;
+    }
+}

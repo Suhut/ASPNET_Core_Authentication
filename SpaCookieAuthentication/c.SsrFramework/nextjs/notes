@@ -1,0 +1,8 @@
+https://www.makeswift.com/blog/accessing-your-local-nextjs-dev-server-using-https
+
+npx local-ssl-proxy --key localhost-key.pem --cert localhost.pem --source 3001 --target 3000 
+
+
+--
+use case :
+ketika yg eksekusi ssr(server nextjs) maka header bisa di modifikasi sebelum di kirim ke dotnet

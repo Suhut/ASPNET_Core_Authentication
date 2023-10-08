@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a.Together", "a.Together\a.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "b.Seperate", "b.Seperate\b.Seperate.csproj", "{17CD6745-7880-4ACA-93D5-D2CEA53A5757}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "c.SsrFramework", "c.SsrFramework\c.SsrFramework.csproj", "{8CBE8DB8-58CC-4546-8E66-D42DFAC10D96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{17CD6745-7880-4ACA-93D5-D2CEA53A5757}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17CD6745-7880-4ACA-93D5-D2CEA53A5757}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17CD6745-7880-4ACA-93D5-D2CEA53A5757}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CBE8DB8-58CC-4546-8E66-D42DFAC10D96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CBE8DB8-58CC-4546-8E66-D42DFAC10D96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CBE8DB8-58CC-4546-8E66-D42DFAC10D96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CBE8DB8-58CC-4546-8E66-D42DFAC10D96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

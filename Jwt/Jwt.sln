@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.33927.210
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{000D04C0-770E-44DF-BF5E-DB4E5AC6FFA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "External", "External\External.csproj", "{6F317E9A-0A7B-4888-A289-E9836E3AF40A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyGen", "KeyGen\KeyGen.csproj", "{2B119CAD-4D88-4B98-A6B4-1853E5997B31}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{000D04C0-770E-44DF-BF5E-DB4E5AC6FFA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{000D04C0-770E-44DF-BF5E-DB4E5AC6FFA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{000D04C0-770E-44DF-BF5E-DB4E5AC6FFA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{000D04C0-770E-44DF-BF5E-DB4E5AC6FFA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F317E9A-0A7B-4888-A289-E9836E3AF40A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F317E9A-0A7B-4888-A289-E9836E3AF40A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F317E9A-0A7B-4888-A289-E9836E3AF40A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F317E9A-0A7B-4888-A289-E9836E3AF40A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B119CAD-4D88-4B98-A6B4-1853E5997B31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B119CAD-4D88-4B98-A6B4-1853E5997B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B119CAD-4D88-4B98-A6B4-1853E5997B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B119CAD-4D88-4B98-A6B4-1853E5997B31}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C07CEC9E-16F4-4685-94DE-95FCD5CAB7D1}
+	EndGlobalSection
+EndGlobal

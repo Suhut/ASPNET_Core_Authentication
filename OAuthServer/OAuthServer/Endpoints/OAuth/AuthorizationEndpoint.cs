@@ -10,13 +10,26 @@ public static class AuthorizationEndpoint
         IDataProtectionProvider dataProtectionProvider
         )
     {
-        request.Query.TryGetValue("response_type", out var responseType);
+        var iss = HttpUtility.UrlEncode("https://localhost:5005");
+        request.Query.TryGetValue("state", out var state);
+
+        if(!request.Query.TryGetValue("response_type", out var responseType))
+        {
+            return Results.BadRequest(new
+            {
+                error = "invalid_request",
+                state,
+                iss
+            });
+        }
+
+        //request.Query.TryGetValue("response_type", out var responseType);
         request.Query.TryGetValue("client_id", out var clientId);
         request.Query.TryGetValue("code_challenge", out var codeChallenge);
         request.Query.TryGetValue("code_challenge_method", out var codeChallengeMethod);
         request.Query.TryGetValue("redirect_uri", out var redirectUri);
         request.Query.TryGetValue("scope", out var scope);
-        request.Query.TryGetValue("state", out var state);
+        //request.Query.TryGetValue("state", out var state);
 
         var protector = dataProtectionProvider.CreateProtector("oauth");
         var code = new AuthCode()

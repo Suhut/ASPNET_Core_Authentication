@@ -10,86 +10,91 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAuthentication("cookie")
     .AddCookie("cookie")
-    .AddOpenIdConnect("openiddict", o =>
-     {
-         //https://github.com/Suhut/OpenIdDictIdentityServer/blob/nextjs_x_openiddict_x_bff/OpenIdDictIdentityServer/Data/Seed/Worker.cs
+//.AddOpenIdConnect("openiddict", o =>
+// {
+//     //https://github.com/Suhut/OpenIdDictIdentityServer/blob/nextjs_x_openiddict_x_bff/OpenIdDictIdentityServer/Data/Seed/Worker.cs
 
-         o.SignInScheme = "cookie";
-         o.ClientId = "OAuthClient";
-         o.ClientSecret = "OAuth-Secret";
+//     o.SignInScheme = "cookie";
+//     o.ClientId = "OAuthClient";
+//     o.ClientSecret = "OAuth-Secret";
 
-         o.Authority = "http://192.168.8.109:7211";
-         o.RequireHttpsMetadata = false;
+//     o.Authority = "http://192.168.8.109:7211";
+//     o.RequireHttpsMetadata = false;
 
-         o.ResponseType = OpenIdConnectResponseType.Code;
+//     o.ResponseType = OpenIdConnectResponseType.Code;
 
-         o.CallbackPath = "/cb-oauth";
+//     o.CallbackPath = "/cb-oauth";
 
-         o.Scope.Add("profile");
-         o.SaveTokens = true;
+//     o.Scope.Add("profile");
+//     o.SaveTokens = true;
 
 
-         o.ClaimActions.MapJsonKey("sub", "id");
-         o.ClaimActions.MapJsonKey(ClaimTypes.Name, "login");
+//     o.ClaimActions.MapJsonKey("sub", "id");
+//     o.ClaimActions.MapJsonKey(ClaimTypes.Name, "login");
 
-         o.Events.OnTokenValidated = tokenValidatedContext =>
-         {
-             var handler = new JwtSecurityTokenHandler();
-             // get access token
-             var jsonToken = handler.ReadJwtToken(tokenValidatedContext.TokenEndpointResponse.AccessToken);
+//     o.Events.OnTokenValidated = tokenValidatedContext =>
+//     {
+//         var handler = new JwtSecurityTokenHandler();
+//         // get access token
+//         var jsonToken = handler.ReadJwtToken(tokenValidatedContext.TokenEndpointResponse.AccessToken);
 
-             var claims = new List<Claim>();
+//         var claims = new List<Claim>();
 
-             claims.Add(new Claim("customClaimType", "customClaimValue"));
+//         claims.Add(new Claim("customClaimType", "customClaimValue"));
 
-             var appIdentity = new ClaimsIdentity(claims);
+//         var appIdentity = new ClaimsIdentity(claims);
 
-             tokenValidatedContext.Principal.AddIdentity(appIdentity);
-             return Task.CompletedTask;
+//         tokenValidatedContext.Principal.AddIdentity(appIdentity);
+//         return Task.CompletedTask;
 
-         };
-          
-         o.Events.OnTicketReceived = async ctx =>
-         {
-             var access_token = ctx.HttpContext.GetTokenAsync("access_token");
-             var headers= ctx.HttpContext.Response.Headers;
-             //var request = new HttpRequestMessage(HttpMethod.Get, ctx.Options.UserInformationEndpoint);
-             //request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", ctx.to);
-             //using var result = await ctx.Backchannel.SendAsync(request);
-             //var user = await result.Content.ReadFromJsonAsync<JsonElement>(); 
+//     };
 
-         };
-     });
+//     o.Events.OnTicketReceived = async ctx =>
+//     {
+//         var access_token = ctx.HttpContext.GetTokenAsync("access_token");
+//         var headers = ctx.HttpContext.Response.Headers;
+//         //var request = new HttpRequestMessage(HttpMethod.Get, ctx.Options.UserInformationEndpoint);
+//         //request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", ctx.to);
+//         //using var result = await ctx.Backchannel.SendAsync(request);
+//         //var user = await result.Content.ReadFromJsonAsync<JsonElement>(); 
 
-//.AddOAuth("openiddict", o =>
-//{
-//    o.SignInScheme = "cookie";
+//     };
+// });
 
-//    o.ClientId = "OAuthClient";
-//    o.ClientSecret = "OAuth-Secret";
+.AddOAuth("openiddict", o =>
+{
 
-//    o.AuthorizationEndpoint = "http://192.168.8.109:7211/connect/authorize";
-//    o.TokenEndpoint = "http://192.168.8.109:7211/connect/token";
-//    o.CallbackPath = "/cb-oauth";
+    o.SignInScheme = "cookie";
 
-//    o.SaveTokens = true;
+    o.ClientId = "OAuthClient";
+    o.ClientSecret = "OAuth-Secret";
 
-//    o.UserInformationEndpoint = "http://192.168.8.109:7211/connect/userinfo";
+    o.AuthorizationEndpoint = "http://192.168.8.109:7211/connect/authorize";
+    o.TokenEndpoint = "http://192.168.8.109:7211/connect/token";
+    o.CallbackPath = "/cb-oauth";
 
-//    o.ClaimActions.MapJsonKey("sub", "id");
-//    o.ClaimActions.MapJsonKey(ClaimTypes.Name, "login"); 
+    o.UsePkce = true;
 
-//    o.Events.OnCreatingTicket = async ctx =>
-//    {
-//        var request = new HttpRequestMessage(HttpMethod.Get, ctx.Options.UserInformationEndpoint);
-//        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", ctx.AccessToken);
-//        using var result = await ctx.Backchannel.SendAsync(request);
-//        var user = await result.Content.ReadFromJsonAsync<JsonElement>();
+    o.SaveTokens = true;
 
-//        ctx.RunClaimActions(user);
-//    };
+    o.UserInformationEndpoint = "http://192.168.8.109:7211/connect/userinfo";
 
-//});
+    o.Scope.Add("email"); 
+
+    o.ClaimActions.MapJsonKey("sub", "sub");
+    o.ClaimActions.MapJsonKey(ClaimTypes.Email, "email"); 
+
+    o.Events.OnCreatingTicket = async ctx =>
+    {
+        var request = new HttpRequestMessage(HttpMethod.Get, ctx.Options.UserInformationEndpoint);
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", ctx.AccessToken);
+        using var result = await ctx.Backchannel.SendAsync(request);
+        var user = await result.Content.ReadFromJsonAsync<JsonElement>();
+
+        ctx.RunClaimActions(user);
+    };
+
+});
 
 
 
@@ -97,7 +102,7 @@ var app = builder.Build();
 
 app.MapGet("/", async (HttpContext ctx) =>
 {
-    await ctx.GetTokenAsync("access_token");
+    var test=await ctx.GetTokenAsync("access_token");
     return ctx.User.Claims.Select(x => new { x.Type, x.Value }).ToList();
 });
 

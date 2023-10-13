@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "ConsoleAppAuthentication": {
+      "commandName": "Project",
+      "commandLineArgs": "-- auth",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:5005"
+    }
+  }
+}

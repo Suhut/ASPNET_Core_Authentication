@@ -29,6 +29,8 @@ public class Auth
             <OAuthOptionsWithoutSecret, OAuthHandlerWithoutSecret>
             ("default", o =>
             {
+               //https://github.com/Suhut/OpenIdDictIdentityServer/blob/nextjs_x_openiddict_x_bff/OpenIdDictIdentityServer/Data/Seed/Worker.cs
+
                 o.ClientId = "ConsoleClient"; 
                 o.AuthorizationEndpoint = "http://192.168.8.109:7211/connect/authorize";
                 o.TokenEndpoint = "http://192.168.8.109:7211/connect/token";

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34202.233
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend", "Backend\Backend.csproj", "{2883EF52-32D9-4D2D-9566-DD59864A9D85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendAuth", "BackendAuth\BackendAuth.csproj", "{CB8049C2-0BFA-428A-A61E-29847397BA2C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2883EF52-32D9-4D2D-9566-DD59864A9D85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2883EF52-32D9-4D2D-9566-DD59864A9D85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2883EF52-32D9-4D2D-9566-DD59864A9D85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2883EF52-32D9-4D2D-9566-DD59864A9D85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB8049C2-0BFA-428A-A61E-29847397BA2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB8049C2-0BFA-428A-A61E-29847397BA2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB8049C2-0BFA-428A-A61E-29847397BA2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB8049C2-0BFA-428A-A61E-29847397BA2C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6AA54020-6C16-4879-AC98-663BE9BAB4E1}
+	EndGlobalSection
+EndGlobal
